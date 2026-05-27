@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-Shirt Designs — Md Rasel Khandaker</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <style>
+    /* ─── T-SHIRT SHOWCASE PAGE ─── */
+    .tshirt-hero {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .tshirt-hero .section-label { display: block; margin-bottom: 0.8rem; }
+    .tshirt-hero .section-title { margin-bottom: 0.8rem; }
+    .tshirt-hero-desc {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .tshirt-filters {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      padding: 1rem 2rem 2.5rem;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--gray);
+      padding: 0.4rem 1.2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,0.06);
+    }
+    .tshirt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 4rem 6rem;
+    }
+    .tshirt-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      transition: border-color 0.3s, transform 0.3s;
+      animation: fadeUp 0.7s ease both;
+      cursor: pointer;
+    }
+    .tshirt-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+    .tshirt-card-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+    .tshirt-img-box {
+      position: relative;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      background: #0d1e38;
+    }
+    .tshirt-img-box img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    .tshirt-card:hover .tshirt-img-box img { transform: scale(1.05); }
+    .img-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(10,22,40,0.82);
+      color: var(--gold);
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px;
+      text-align: center;
+    }
+    .tshirt-card-info { padding: 1.2rem 1.4rem 1.4rem; border-top: 1px solid var(--border); }
+    .tshirt-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .tshirt-card-meta { font-size: 0.72rem; color: var(--gray); letter-spacing: 1px; margin-bottom: 0.8rem; }
+    .tshirt-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .tshirt-tag {
+      font-size: 0.62rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+    }
+    .tshirt-card-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.65rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .tshirt-card-btn:hover { background: var(--gold); color: var(--navy); }
+    .tshirt-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5,12,28,0.92);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .tshirt-modal-overlay.open { display: flex; }
+    .tshirt-modal {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      max-width: 560px;
+      width: 100%;
+      animation: fadeUp 0.3s ease both;
+    }
+    .tshirt-modal-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+    .tshirt-modal-img { aspect-ratio: 1/1; overflow: hidden; }
+    .tshirt-modal-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .tshirt-modal-body { padding: 1.5rem; }
+    .tshirt-modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    .tshirt-modal-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.8; margin-bottom: 1rem; }
+    .tshirt-modal-includes { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .include-badge {
+      font-size: 0.65rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+    }
+    .tshirt-modal-actions { display: flex; gap: 0.8rem; }
+    .modal-btn-primary {
+      flex: 1;
+      text-align: center;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s;
+      cursor: pointer;
+      border: none;
+      display: inline-block;
+    }
+    .modal-btn-primary:hover { background: var(--gold-light); }
+    .modal-btn-close {
+      padding: 0.75rem 1.2rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--gray);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .modal-btn-close:hover { border-color: var(--gold); color: var(--gold); }
+    @media (max-width: 768px) {
+      .tshirt-grid { padding: 0 1.5rem 4rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+      .tshirt-hero { padding: 3rem 1.5rem 2rem; }
+      .tshirt-filters { padding: 0.5rem 1.5rem 2rem; }
+    }
+    @media (max-width: 480px) {
+      .tshirt-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Md Rasel Khandaker</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="design.html">Design</a></li>
+    <li><a href="poetry.html">Poetry</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <!-- Hero -->
+  <div class="tshirt-hero">
+    <span class="section-label">Graphic Design</span>
+    <h1 class="section-title">T-Shirt Designs</h1>
+    <div class="section-divider" style="margin: 0 auto 1.5rem;"></div>
+    <p class="tshirt-hero-desc">
+      A curated collection of original t-shirt artwork — each piece shown with a styled mockup alongside the raw design. Browse, explore, and get in touch for custom orders.
+    </p>
+  </div>
+
+  <!-- Filters -->
+  <div class="tshirt-filters">
+    <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+    <button class="filter-btn" onclick="filterCards('minimal', this)">Minimal</button>
+    <button class="filter-btn" onclick="filterCards('typography', this)">Typography</button>
+    <button class="filter-btn" onclick="filterCards('abstract', this)">Abstract</button>
+    <button class="filter-btn" onclick="filterCards('nature', this)">Nature</button>
+  </div>
+
+  <!-- Grid -->
+  <div class="tshirt-grid" id="tshirt-grid">
+
+    <div class="tshirt-card" data-category="minimal" onclick="openModal('Urban Wave','Clean geometric wave pattern with bold navy contrast. Perfect for streetwear or casual outings.','img/tshirt/urban-wave-mockup.jpg','img/tshirt/urban-wave-design.jpg',['Mockup PNG','Print-ready'])">
+      <div class="tshirt-card-images">
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80" alt="Urban Wave Mockup" />
+          <span class="img-label">Mockup</span>
+        </div>
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Urban Wave Design" />
+          <span class="img-label">Design</span>
+        </div>
+      </div>
+      <div class="tshirt-card-info">
+        <div class="tshirt-card-title">Urban Wave</div>
+        <div class="tshirt-card-meta">Minimal · 2024</div>
+        <div class="tshirt-tags"><span class="tshirt-tag">Geometric</span><span class="tshirt-tag">Streetwear</span></div>
+        <button class="tshirt-card-btn">View Design</button>
+      </div>
+    </div>
+
+    <div class="tshirt-card" data-category="typography" onclick="openModal('Bold Statement','A typographic piece built around powerful words and editorial spacing. Designed for those who speak through their wardrobe.','img/tshirt/bold-mockup.jpg','img/tshirt/bold-design.jpg',['Mockup PNG','Print-ready'])">
+      <div class="tshirt-card-images">
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&q=80" alt="Bold Statement Mockup" />
+          <span class="img-label">Mockup</span>
+        </div>
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&q=80" alt="Bold Statement Design" />
+          <span class="img-label">Design</span>
+        </div>
+      </div>
+      <div class="tshirt-card-info">
+        <div class="tshirt-card-title">Bold Statement</div>
+        <div class="tshirt-card-meta">Typography · 2024</div>
+        <div class="tshirt-tags"><span class="tshirt-tag">Editorial</span><span class="tshirt-tag">Typographic</span></div>
+        <button class="tshirt-card-btn">View Design</button>
+      </div>
+    </div>
+
+    <div class="tshirt-card" data-category="abstract" onclick="openModal('Fractal Mind','Abstract flowing forms inspired by nature and neural patterns. A conversation starter in wearable form.','img/tshirt/fractal-mockup.jpg','img/tshirt/fractal-design.jpg',['Mockup PNG','Print-ready'])">
+      <div class="tshirt-card-images">
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&q=80" alt="Fractal Mind Mockup" />
+          <span class="img-label">Mockup</span>
+        </div>
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400&q=80" alt="Fractal Mind Design" />
+          <span class="img-label">Design</span>
+        </div>
+      </div>
+      <div class="tshirt-card-info">
+        <div class="tshirt-card-title">Fractal Mind</div>
+        <div class="tshirt-card-meta">Abstract · 2025</div>
+        <div class="tshirt-tags"><span class="tshirt-tag">Abstract</span><span class="tshirt-tag">Art</span></div>
+        <button class="tshirt-card-btn">View Design</button>
+      </div>
+    </div>
+
+    <div class="tshirt-card" data-category="nature" onclick="openModal('Botanical Echo','Hand-illustrated botanical motif with fine line details. Elegant and timeless.','img/tshirt/botanical-mockup.jpg','img/tshirt/botanical-design.jpg',['Mockup PNG','Print-ready'])">
+      <div class="tshirt-card-images">
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&q=80" alt="Botanical Echo Mockup" />
+          <span class="img-label">Mockup</span>
+        </div>
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1609743522653-52354461eb27?w=400&q=80" alt="Botanical Echo Design" />
+          <span class="img-label">Design</span>
+        </div>
+      </div>
+      <div class="tshirt-card-info">
+        <div class="tshirt-card-title">Botanical Echo</div>
+        <div class="tshirt-card-meta">Nature · 2025</div>
+        <div class="tshirt-tags"><span class="tshirt-tag">Botanical</span><span class="tshirt-tag">Fine Line</span></div>
+        <button class="tshirt-card-btn">View Design</button>
+      </div>
+    </div>
+
+    <div class="tshirt-card" data-category="minimal" onclick="openModal('Zero Noise','Ultra-minimal single-line design. Less is more, always.','img/tshirt/zero-mockup.jpg','img/tshirt/zero-design.jpg',['Mockup PNG','Print-ready'])">
+      <div class="tshirt-card-images">
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&q=80" alt="Zero Noise Mockup" />
+          <span class="img-label">Mockup</span>
+        </div>
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&q=80" alt="Zero Noise Design" />
+          <span class="img-label">Design</span>
+        </div>
+      </div>
+      <div class="tshirt-card-info">
+        <div class="tshirt-card-title">Zero Noise</div>
+        <div class="tshirt-card-meta">Minimal · 2025</div>
+        <div class="tshirt-tags"><span class="tshirt-tag">Minimal</span><span class="tshirt-tag">Clean</span></div>
+        <button class="tshirt-card-btn">View Design</button>
+      </div>
+    </div>
+
+    <div class="tshirt-card" data-category="abstract" onclick="openModal('Spectrum Break','Bold color-break design inspired by light refraction. High-impact visual for statement pieces.','img/tshirt/spectrum-mockup.jpg','img/tshirt/spectrum-design.jpg',['Mockup PNG','Print-ready'])">
+      <div class="tshirt-card-images">
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1598032895397-b9472444bf93?w=400&q=80" alt="Spectrum Break Mockup" />
+          <span class="img-label">Mockup</span>
+        </div>
+        <div class="tshirt-img-box">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80" alt="Spectrum Break Design" />
+          <span class="img-label">Design</span>
+        </div>
+      </div>
+      <div class="tshirt-card-info">
+        <div class="tshirt-card-title">Spectrum Break</div>
+        <div class="tshirt-card-meta">Abstract · 2025</div>
+        <div class="tshirt-tags"><span class="tshirt-tag">Bold</span><span class="tshirt-tag">Color</span></div>
+        <button class="tshirt-card-btn">View Design</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="tshirt-modal-overlay" id="tshirt-modal" onclick="closeModalOnBg(event)">
+  <div class="tshirt-modal">
+    <div class="tshirt-modal-images">
+      <div class="tshirt-modal-img"><img id="modal-mockup-img" src="" alt="Mockup" /></div>
+      <div class="tshirt-modal-img"><img id="modal-design-img" src="" alt="Design" /></div>
+    </div>
+    <div class="tshirt-modal-body">
+      <div class="tshirt-modal-title" id="modal-title"></div>
+      <p class="tshirt-modal-desc" id="modal-desc"></p>
+      <div class="tshirt-modal-includes" id="modal-includes"></div>
+      <div class="tshirt-modal-actions">
+        <a href="contact.html" class="modal-btn-primary">Request This Design →</a>
+        <button class="modal-btn-close" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p style="color: var(--gold); font-size: 0.75rem; letter-spacing: 2px;">AI & IoT Researcher · Published Poet</p>
+  <p style="color: var(--gold); font-size: 0.75rem; letter-spacing: 2px;">© 2026 Md Rasel Khandaker. All rights reserved.</p>
+</footer>
+
+<script>
+  function openModal(title, desc, mockup, design, includes) {
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-desc').textContent = desc;
+    document.getElementById('modal-mockup-img').src = mockup;
+    document.getElementById('modal-design-img').src = design;
+    var inc = document.getElementById('modal-includes');
+    inc.innerHTML = '';
+    includes.forEach(function(item) {
+      var s = document.createElement('span');
+      s.className = 'include-badge';
+      s.textContent = item;
+      inc.appendChild(s);
+    });
+    document.getElementById('tshirt-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('tshirt-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOnBg(e) {
+    if (e.target === document.getElementById('tshirt-modal')) closeModal();
+  }
+  function filterCards(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('#tshirt-grid .tshirt-card').forEach(function(card) {
+      card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
+    });
+  }
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>

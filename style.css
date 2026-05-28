@@ -399,40 +399,6 @@ nav {
   margin-bottom: 1.5rem;
 }
 
-/* ─── POETRY ─── */
-.poem-card {
-  background: var(--navy-mid);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--gold);
-  padding: 2rem;
-  margin-bottom: 1.5rem;
-  transition: transform 0.3s;
-}
-
-.poem-card:hover { transform: translateX(6px); }
-
-.poem-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  color: var(--white);
-  margin-bottom: 0.8rem;
-}
-
-.poem-excerpt {
-  font-size: 0.9rem;
-  color: var(--gray);
-  line-height: 1.9;
-  font-style: italic;
-}
-
-.poem-meta {
-  margin-top: 1rem;
-  font-size: 0.72rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
 /* ─── FOOTER ─── */
 footer {
   display: flex;

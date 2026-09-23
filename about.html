@@ -1,70 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Md Rasel Khandaker</title>
+  <meta name="description" content="About Md Rasel Khandaker: textile engineer, PhD researcher in machine vision for textile quality, and published poet.">
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
 </head>
+<body>
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Md Rasel Khandaker</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links"><li><a href="index.html" class="">Home</a></li><li><a href="research.html" class="">Research</a></li><li><a href="demo.html" class="nav-demo">Live demo</a></li><li><a href="about.html" class="" aria-current="page">About</a></li><li><a href="skills.html" class="">Skills</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
+  </div>
+</header>
+<main>
 
-<nav>
-  <a href="index.html" class="nav-logo">Md Rasel Khandaker</a>
-  
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="research.html">Research</a></li>
-    <li><a href="skills.html">Skills</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
-
-<div class="page">
-  <div class="section">
-    <p class="section-label">About Me</p>
-    <h2 class="section-title">Who I Am</h2>
-    <div class="section-divider"></div>
-
-    <div class="about-grid">
-      <div class="about-sidebar">
-        <img src="mr.jpeg" style="width:100%; aspect-ratio:3/4; object-fit:cover; border: 1px solid rgba(201,168,76,0.2); border-radius: 0.5cap;">
-        <div class="about-quick"> <br>
-          <div class="about-quick-item">
-            <span class="about-quick-label">Degree</span>
-            <span class="about-quick-value">MSc — Engineering Business Management (Specialization: AI & Intelligent Systems)</span>
-          </div>
-          <div class="about-quick-item">
-            <span class="about-quick-label">University</span>
-            <span class="about-quick-value">Multimedia University, Malaysia</span>
-          </div>
-          <div class="about-quick-item">
-            <span class="about-quick-label">RESEARCHER</span>
-            <span class="about-quick-value">AI & IoT Researcher</span>
-          </div>
-          <div class="about-quick-item">
-            <span class="about-quick-label">WRITER</span>
-            <span class="about-quick-value">Published Poet</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="about-body" style="text-align: justify;">
-        <p>
-          I have a strong academic background in Science and Engineering, having completed my MSc in Engineering Business Management from Multimedia University, Malaysia, following a BSc from Sonargaon University, Bangladesh. 
-          My research interests focus on Artificial Intelligence, IoT-based intelligent systems, and machine 
-          learning applications in industrial quality monitoring, and my research accepted for presentation at ICTIM 2026, 
-          and a second implementation-focused paper is currently being prepared for submission to an IEEE 2026 conference, with a journal publication also in progress.
-        <p>
-          I have practical experience in Python programming and data-driven system development, including Flask, HTML5, CSS3, and JavaScript, 
-          as well as using GitHub for version control. These skills allow me to build intelligent and data-driven systems.
-        </p>
-        <p>
-          Beyond my academic work, I am also a published poet. My book "Meherban" reflects a deeply personal exploration of emotion, identity, 
-          and the human experience, highlighting my creative perspective alongside my technical background.
-        </p>
-        <a href="contact.html" class="btn-primary" style="display:inline-block; margin-top: 1rem;">Contact Me</a>
+<section class="page-head">
+  <div class="wrap"><h1>About</h1></div>
+</section>
+<section class="section" style="padding-top:1.5rem">
+  <div class="wrap about-grid">
+    <aside class="about-side">
+      <div class="portrait"><img src="mr.jpeg" alt="Md Rasel Khandaker" width="959" height="960"></div>
+      <dl class="facts">
+        <dt>Current</dt><dd>PhD researcher, Multimedia University, Malaysia</dd>
+        <dt>MSc</dt><dd>Engineering Business Management (AI and Intelligent Systems), Multimedia University</dd>
+        <dt>BSc</dt><dd>Textile Engineering, Sonargaon University, Bangladesh</dd>
+        <dt>Also</dt><dd>Published poet</dd>
+      </dl>
+    </aside>
+    <div class="prose">
+      <p>I hold a BSc in Textile Engineering from Sonargaon University, Bangladesh, and an MSc in Engineering Business Management, specialising in AI and Intelligent Systems, from Multimedia University, Malaysia.</p>
+      <p>My MSc research, with Dr. Siva Priya A/P Thiagarajah, studied the adoption of IoT-enabled quality monitoring in textile factories in Bangladesh and was presented at ICTIM 2026. My current research builds on it: a low-cost machine vision system that measures fabric colour differences in real time using a webcam, controlled LED lighting and CIEDE2000. A manuscript on this system is in preparation for an IEEE venue.</p>
+      <p>I work mainly in Python — OpenCV, NumPy and Flask — and build the interfaces myself with HTML, CSS and JavaScript, using GitHub for version control.</p>
+      <p>Outside research I write poetry. My book <em>Meherban</em> explores emotion, identity and the human experience.</p>
+      <div class="btns" style="margin-top:1.5rem">
+        <a class="btn btn-primary" href="contact.html">Contact me</a>
+        <a class="btn btn-ghost" href="cvw.pdf" target="_blank" rel="noopener">CV (PDF)</a>
       </div>
     </div>
   </div>
-</div>
-<footer>
-  <p style="color: var(--gold); font-size: 0.75rem; letter-spacing: 2px;">AI & IoT Researcher · Published Poet</p>
-  <p style="color: var(--gold); font-size: 0.75rem; letter-spacing: 2px;">© 2026 Md Rasel Khandaker. All rights reserved.</p>
+</section>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Md Rasel Khandaker</span>
+    <span>Machine vision for textile quality · Multimedia University, Malaysia</span>
+  </div>
 </footer>
+<script src="site.js"></script>
+</body>
+</html>

@@ -1,49 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Md Rasel Khandaker — Machine Vision for Textile Quality</title>
+  <meta name="description" content="Md Rasel Khandaker, PhD researcher at Multimedia University, builds low-cost machine vision systems for fabric colour inspection.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
 </head>
+<body>
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Md Rasel Khandaker</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links"><li><a href="index.html" class="" aria-current="page">Home</a></li><li><a href="research.html" class="">Research</a></li><li><a href="demo.html" class="nav-demo">Live demo</a></li><li><a href="about.html" class="">About</a></li><li><a href="skills.html" class="">Skills</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
+  </div>
+</header>
+<main>
 
-<nav>
-  <a href="index.html" class="nav-logo">Md Rasel Khandaker</a>
-  
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="research.html">Research</a></li>
-    <li><a href="skills.html">Skills</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
-<div class="page">
-  <section class="hero">
-    <div class="hero-content">
-      <span class="hero-tag">MSc Graduate · AI & IoT Researcher</span>
-      <h1 class="hero-name">
-        Hello, I'm<br>
-        <span>Md Rasel Khandaker</span>
-      </h1>
-      <p class="hero-desc">
-        A researcher in Artificial Intelligence and IoT-based systems, focused on developing intelligent solutions for industrial quality monitoring using machine learning and data-driven approaches.
-      </p>
-      <div class="hero-btns">
-        <a href="research.html" class="btn-primary">View Research</a>
-        <a href="cvw.pdf" target="_blank" class="btn-primary">View CV</a>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="hero-role">PhD Researcher · Machine Vision for Textile Quality</p>
+      <h1>Md Rasel Khandaker</h1>
+      <p class="lead">I build low-cost vision systems that measure fabric colour objectively, so that small and medium textile factories can check shade consistency without an expensive laboratory instrument.</p>
+      <div class="btns">
+        <a class="btn btn-teal" href="demo.html">Try the live demo</a>
+        <a class="btn btn-primary" href="research.html">View research</a>
+        <a class="btn btn-ghost" href="cvw.pdf" target="_blank" rel="noopener">CV (PDF)</a>
       </div>
     </div>
-    <div class="hero-line"></div>
-    <div class="hero-text">
+    <div class="portrait"><img src="rasel.jpg" alt="Portrait of Md Rasel Khandaker" width="780" height="1040"></div>
+  </div>
+  <div class="wrap">
+    <div class="swatch-panel">
+      <h2>Same colour to the eye?</h2>
+      <p>Five dyed samples beside their reference. Side by side they look alike, but at a CIEDE2000 limit of 2.0 two of them fail. My system makes that call from a webcam image in real time.</p>
+      <div class="swatches">
+        <div class="swatch swatch-ref"><div class="swatch-chip" style="background:#2E3A6B" role="img" aria-label="Reference colour #2E3A6B"></div><div class="swatch-meta"><span>Reference</span><span class="muted">—</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#2F3B6C" role="img" aria-label="Sample 1 colour #2F3B6C"></div><div class="swatch-meta"><span class="de">ΔE00 0.32</span><span class="verdict pass">Same</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#303C6E" role="img" aria-label="Sample 2 colour #303C6E"></div><div class="swatch-meta"><span class="de">ΔE00 0.71</span><span class="verdict pass">Same</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#2C3867" role="img" aria-label="Sample 3 colour #2C3867"></div><div class="swatch-meta"><span class="de">ΔE00 0.82</span><span class="verdict pass">Same</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#34416F" role="img" aria-label="Sample 4 colour #34416F"></div><div class="swatch-meta"><span class="de">ΔE00 2.25</span><span class="verdict fail">Different</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#3A4679" role="img" aria-label="Sample 5 colour #3A4679"></div><div class="swatch-meta"><span class="de">ΔE00 4.01</span><span class="verdict fail">Different</span></div></div>
+      </div>
+      <p class="swatch-note">Colour differences computed with CIEDE2000 from the sRGB values shown; limit ΔE00 = 2.0.</p>
     </div>
-
-  <div class="hero-img">
-    <img src="rasel.png" alt="Md Rasel Khandaker">
   </div>
+</section>
 
-  </section>
+<section class="section">
+  <div class="wrap feature">
+    <figure class="shot">
+      <img src="demo.png" alt="Screenshot of the fabric colour inspection software" loading="lazy">
+      <figcaption>Inspection software: live camera view, readiness checks and colour-difference graph.</figcaption>
+    </figure>
+    <div>
+      <span class="tag progress">Manuscript in preparation</span>
+      <h2 style="margin-top:0.8rem">Low-cost real-time fabric colour variation detection</h2>
+      <p class="muted">A Python desktop application with a consumer USB webcam and daylight-balanced LED panels, instead of a spectrophotometer. The demo button opens a browser version of the same method that you can try with your own camera.</p>
+      <ul>
+        <li>Colour difference in CIEDE2000, with ΔE*ab and CMC(2:1) recorded</li>
+        <li>Five readiness checks before a test: camera, exposure, stability and even lighting</li>
+        <li>Pass/fail limit derived from the system's own measured noise</li>
+        <li>Reports with per-frame CSV export for analysis</li>
+      </ul>
+      <div class="btns">
+        <a class="btn btn-teal" href="demo.html">Try it in your browser</a>
+        <a class="btn btn-ghost" href="research.html#system">Read more</a>
+        <a class="btn btn-ghost" href="https://github.com/mdraselkhandaker20-png/fabric-color-detection-new" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
   </div>
-</div>
-<footer>
-  <p style="color: var(--gold); font-size: 0.75rem; letter-spacing: 2px;">AI & IoT Researcher · Published Poet</p>
-  <p style="color: var(--gold); font-size: 0.75rem; letter-spacing: 2px;">© 2026 Md Rasel Khandaker. All rights reserved.</p>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Publications</h2>
+    <ul class="pubs">
+      <li class="pub">
+        <span class="pub-title">Adoption of IoT-Enabled Quality Monitoring System in a Smart Factory</span>
+        <span class="pub-venue">M. R. Khandaker and S. P. A/P Thiagarajah · 6th International Conference on Technology and Innovation Management (ICTIM 2026), Multimedia University, Malaysia</span>
+        <span class="tag done">Presented</span>
+      </li>
+      <li class="pub">
+        <span class="pub-title">A Low-Cost Machine Vision System for Real-Time Fabric Colour Variation Detection</span>
+        <span class="pub-venue">M. R. Khandaker and S. P. A/P Thiagarajah · targeting an IEEE venue</span>
+        <span class="tag progress">In preparation</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta">
+      <div>
+        <h2>Open to research collaboration</h2>
+        <p>Textile quality, colour measurement, machine vision and IoT in manufacturing.</p>
+      </div>
+      <a class="btn btn-ghost" href="contact.html">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Md Rasel Khandaker</span>
+    <span>Machine vision for textile quality · Multimedia University, Malaysia</span>
+  </div>
 </footer>
-
+<script src="site.js"></script>
+</body>
+</html>

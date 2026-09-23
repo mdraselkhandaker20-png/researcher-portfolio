@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live demo — Fabric Color Variation Detection</title>
+    <meta name="description" content="Live browser demo of the Fabric Color Variation Detection system by Md Rasel Khandaker: CIEDE2000 colour difference with your own webcam.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="demo-app.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sb-top">
+            <div class="sb-logo-icon">⬡</div>
+            <div class="sb-logo-text">FABRIC QC<br>VISION LAB</div>
+        </div>
+        <nav class="sb-nav">
+            <a class="sb-item active" id="navCheck" data-view="viewCheck"><span class="sb-dot active"></span> CHECK COLOR</a>
+            <a class="sb-item" id="navSetup" data-view="viewSetup"><span class="sb-dot"></span> SETUP &amp; CALIBRATION</a>
+        </nav>
+        <div class="sb-section">TEST HISTORY</div>
+        <div class="hist" id="historyList"><div class="hist-loading">No tests yet</div></div>
+        <nav class="sb-nav sb-back">
+            <a class="sb-item" href="index.html"><span class="sb-dot"></span> ← BACK TO WEBSITE</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <h1 class="topbar-title">FABRIC COLOR VARIATION DETECTION</h1>
+            <div class="mode-pill demo" title="Web demo: your own camera, no locked exposure">
+                <span class="mp-dot"></span><span>DEMO MODE · Browser camera</span>
+            </div>
+        </header>
+
+        <div class="content-area">
+            <!-- ═══════ CHECK COLOR ═══════ -->
+            <div class="dashboard view" id="viewCheck">
+                <div class="top-row">
+                    <div class="sec-lbl">CHECKING COLOR</div>
+                    <div class="setup-line demo-note">Web demo — readings are indicative only. The research system uses a locked USB camera and a 5500 K LED booth.</div>
+                </div>
+
+                <div class="inp-row">
+                    <div class="ig">
+                        <label for="fabricNameInput">FABRIC NAME</label>
+                        <input type="text" class="field" id="fabricNameInput" placeholder="e.g. Green 220 GSM">
+                    </div>
+                    <div class="ig">
+                        <label for="lightSourceInput">LIGHT SOURCE</label>
+                        <input type="text" class="field" id="lightSourceInput" value="Room light (web demo)">
+                    </div>
+                    <div class="ig xs">
+                        <label for="durationInput">DURATION (S)</label>
+                        <input type="number" class="field" id="durationInput" value="20" min="5" max="120">
+                    </div>
+                    <div class="ig xs">
+                        <label for="thresholdInput">ΔE00 LIMIT</label>
+                        <input type="number" class="field" id="thresholdInput" value="2.0" min="1" step="0.1">
+                    </div>
+                    <div class="ig md">
+                        <label for="cameraSelect">CAMERA</label>
+                        <div class="cam-select-wrap">
+                            <select class="field cam-select" id="cameraSelect"><option value="">Default camera</option></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ctrl-row">
+                    <button class="btn3d start" id="btnStart"><span class="bindi" id="startBindi"></span> START</button>
+                    <button class="btn3d stop" id="btnStop"><span class="bindi red" id="stopBindi"></span> STOP</button>
+                    <button class="btn3d refresh" id="btnRefresh">↺ REFRESH</button>
+                    <div class="ctrl-msg" id="ctrlMsg"></div>
+                    <div class="ctrl-spacer"></div>
+                    <div class="light-group readiness" title="">
+                        <div class="light-badge checking lightBadge"><span class="lbd"></span><span class="lightTxt">NO CAMERA</span></div>
+                        <div class="light-sep"></div>
+                        <div class="dots-wrap">
+                            <div class="ld dim" data-k="camera"></div><div class="ld dim" data-k="dark"></div>
+                            <div class="ld dim" data-k="bright"></div><div class="ld dim" data-k="stable"></div>
+                            <div class="ld dim" data-k="even"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-row">
+                    <div class="cam-container">
+                        <div class="cam-frame">
+                            <canvas id="liveCanvas" aria-label="Camera view with inspection box"></canvas>
+                            <div class="cam-start">
+                                <button class="btn3d refresh btnCamera">▶ START CAMERA</button>
+                                <p>Your browser will ask for camera permission. The image is processed on your device and never uploaded.</p>
+                            </div>
+                            <div class="cam-scan" id="camScan"></div>
+                            <div class="cam-name" id="camFabricName"></div>
+                            <div class="cam-timer" id="camTimer" style="display:none;">20s</div>
+                            <div class="swatches">
+                                <div class="sw" id="swRefWrap" style="display:none;"><span class="sw-chip" id="swRef"></span><span>Reference</span></div>
+                                <div class="sw"><span class="sw-chip" id="swLive"></span><span id="swLiveLbl">Live</span></div>
+                            </div>
+                            <div class="demo-banner">DEMO MODE — browser camera. Auto exposure cannot be locked here, so readings are for demonstration only.</div>
+                            <div class="state-banner" id="stateBanner" style="display:none;"></div>
+                            <div class="light-warn" id="lightWarn" style="display:none;">⚠ LIGHT OUT OF RANGE — TEST WILL STOP</div>
+                        </div>
+                    </div>
+                    <div class="side-col">
+                        <div class="qbar-wrap">
+                            <div class="qbar-top">
+                                <div class="qbar-lbl">QUALITY SCORE</div>
+                                <div class="qbar-mid">Min acceptable: <span>80%</span></div>
+                                <div class="qbar-val" id="qbarVal">— %</div>
+                            </div>
+                            <div class="qbar-bg">
+                                <div class="qbar-fill" id="qbarFill" style="width:0%"></div>
+                                <div class="qbar-m80"></div><span class="qbar-m80-lbl">80%</span>
+                                <div class="qbar-m90"></div><span class="qbar-m90-lbl">90% ★</span>
+                            </div>
+                        </div>
+                        <div class="sg-row">
+                            <div class="stats-col">
+                                <div class="sc good"><div class="sc-pct" id="scGoodPct">0%</div><div class="sc-lbl" id="scGoodLbl">GOOD</div></div>
+                                <div class="sc bad"><div class="sc-pct" id="scBadPct">0%</div><div class="sc-lbl">DEFECT</div></div>
+                                <div class="sc neu"><div class="sc-pct" id="scTotal">0</div><div class="sc-lbl">TOTAL</div></div>
+                            </div>
+                            <div class="graph-card">
+                                <div class="graph-title">COLOR DIFFERENCE (ΔE00, CIEDE2000) — LIVE</div>
+                                <canvas id="colorGraph"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════ SETUP & CALIBRATION ═══════ -->
+            <div class="setup-page view" id="viewSetup" hidden>
+                <div class="top-row">
+                    <div class="sec-lbl">SETUP &amp; CALIBRATION</div>
+                    <div class="light-group readiness" title="">
+                        <div class="light-badge checking lightBadge"><span class="lbd"></span><span class="lightTxt">NO CAMERA</span></div>
+                        <div class="light-sep"></div>
+                        <div class="dots-wrap">
+                            <div class="ld dim" data-k="camera"></div><div class="ld dim" data-k="dark"></div>
+                            <div class="ld dim" data-k="bright"></div><div class="ld dim" data-k="stable"></div>
+                            <div class="ld dim" data-k="even"></div>
+                        </div>
+                    </div>
+                </div>
+                <ol class="steps">
+                    <li>Put a <strong>uniformly dyed reference fabric</strong> under the camera.</li>
+                    <li>Move the camera and lights until all five checks are green.</li>
+                    <li><strong>Measure baseline</strong> — the system records its own noise.</li>
+                    <li>Use the suggested ΔE00 limit for your tests.</li>
+                </ol>
+                <div class="setup-grid">
+                    <div class="cam-frame setup-cam">
+                        <canvas id="setupCanvas" aria-label="Camera view with 3 by 3 uniformity grid"></canvas>
+                        <div class="cam-start">
+                            <button class="btn3d refresh btnCamera">▶ START CAMERA</button>
+                            <p>Your browser will ask for camera permission. The image is processed on your device and never uploaded.</p>
+                        </div>
+                        <div class="state-banner" id="setupBanner" style="display:none;"></div>
+                    </div>
+                    <div class="panel checks-panel">
+                        <div class="panel-title">Live checks</div>
+                        <div class="check-list" id="checkList"><div class="muted">Start the camera.</div></div>
+                        <div class="cam-info">Browser camera · exposure &amp; white balance: automatic (cannot be locked in a browser)</div>
+                        <div class="panel-title mt">Baseline</div>
+                        <div class="baseline-row">
+                            <label for="baselineDur">Seconds</label>
+                            <input type="number" class="field sm-field" id="baselineDur" value="10" min="3" max="60">
+                            <button class="btn3d refresh" id="btnBaseline">MEASURE BASELINE</button>
+                        </div>
+                        <div class="progress" id="baselineProgress" style="display:none;"><div class="progress-fill" id="baselineFill"></div></div>
+                        <div class="baseline-result" id="baselineResult"><span class="muted">No baseline measured yet.</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div class="modal-overlay" id="reportModal" style="display:none;">
+    <div class="modal-box">
+        <div class="modal-title">TEST COMPLETE</div>
+        <div class="modal-fabric" id="modalFabric">—</div>
+        <div class="modal-mode demo" id="modalMode"></div>
+        <div class="modal-stats">
+            <div class="modal-stat good"><span class="ms-pct" id="modalGoodPct">—</span><span class="ms-lbl">GOOD</span></div>
+            <div class="modal-stat bad"><span class="ms-pct" id="modalBadPct">—</span><span class="ms-lbl">DEFECT</span></div>
+        </div>
+        <div class="modal-verdict" id="modalVerdict">—</div>
+        <div class="modal-report" id="modalReport"></div>
+        <div class="modal-actions">
+            <button class="btn-modal-view" id="modalCsvBtn">⬇ EXPORT CSV</button>
+            <button class="btn-modal-again" id="modalAgainBtn">CHECK AGAIN</button>
+            <button class="btn-modal-close" id="modalCloseBtn">CLOSE</button>
+        </div>
+    </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="colour.js"></script>
+<script src="demo-app.js"></script>
+</body>
+</html>

@@ -312,3 +312,24 @@ h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
   .hero-grid .portrait { height: min(64vh, 560px); width: auto; aspect-ratio: 3 / 4; }
   .hero h1 { font-size: clamp(2.5rem, 4.6vw, 3.8rem); }
 }
+
+/* ─── One-screen homepage ─── */
+.hero-compact { padding: 1.6rem 0 1.4rem; }
+.quick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.6rem; }
+.quick-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1rem 1.2rem; text-decoration: none; color: var(--ink);
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+.quick-card:hover { border-color: var(--indigo); box-shadow: 0 10px 24px rgba(22, 27, 46, 0.08); transform: translateY(-2px); color: var(--ink); }
+.quick-card strong { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; margin-top: 0.25rem; }
+.quick-card span:not(.tag) { font-size: 0.92rem; color: var(--ink-2); line-height: 1.45; }
+.quick-card em { font-style: normal; font-weight: 600; font-size: 0.9rem; color: var(--indigo); margin-top: auto; padding-top: 0.3rem; }
+@media (min-width: 901px) {
+  .hero-compact .hero-grid .portrait { height: clamp(260px, calc(100vh - 380px), 470px); }
+  .hero-compact h1 { font-size: clamp(2.4rem, 4.2vw, 3.6rem); margin-bottom: 0.9rem; }
+  .hero-compact .lead { margin-bottom: 1.4rem; }
+}
+@media (max-width: 900px) { .quick { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .quick-card { transition: none; } .quick-card:hover { transform: none; } }

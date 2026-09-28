@@ -493,3 +493,7 @@ button:focus-visible, select:focus-visible, a:focus-visible { outline:2px solid 
     .inp-row .ig, .inp-row .ig.xs, .inp-row .ig.md { flex: 1 1 100%; }
     .top-row { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
+.cam-start .how { text-align:left; max-width:440px; margin-bottom:6px; }
+.cam-start .how-title { font-size:12px; letter-spacing:0.14em; color:#c8a951; font-weight:700; margin-bottom:6px; }
+.cam-start .how ol { padding-left:20px; color:#d8e6dc; font-size:14px; line-height:1.55; }
+.cam-start .how b { color:#fff; }

@@ -304,3 +304,11 @@ h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
 .card .try-box { background: var(--paper); }
 .try-box h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
 .try-box p { color: var(--ink-2); font-size: 0.95rem; max-width: 40em; }
+
+/* ─── Hero fits in the first screen (desktop) ─── */
+@media (min-width: 901px) {
+  .hero { padding: 2.2rem 0 2rem; }
+  .hero-grid { grid-template-columns: 1fr auto; gap: 4rem; }
+  .hero-grid .portrait { height: min(64vh, 560px); width: auto; aspect-ratio: 3 / 4; }
+  .hero h1 { font-size: clamp(2.5rem, 4.6vw, 3.8rem); }
+}

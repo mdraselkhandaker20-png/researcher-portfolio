@@ -13,7 +13,7 @@
   <div class="nav-inner">
     <a href="index.html" class="brand">Md Rasel Khandaker</a>
     <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <ul class="nav-links" id="nav-links"><li><a href="index.html" class="" aria-current="page">Home</a></li><li><a href="research.html" class="">Research</a></li><li><a href="demo.html" class="nav-demo">Live demo</a></li><li><a href="about.html" class="">About</a></li><li><a href="skills.html" class="">Skills</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
+    <ul class="nav-links" id="nav-links"><li><a href="index.html" class="" aria-current="page">Home</a></li><li><a href="research.html" class="">Research</a></li><li><a href="demo.html" class="nav-demo">Web demo</a></li><li><a href="about.html" class="">About</a></li><li><a href="skills.html" class="">Skills</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
   </div>
 </header>
 <main>
@@ -25,7 +25,7 @@
       <h1>Md Rasel Khandaker</h1>
       <p class="lead">I build low-cost vision systems that measure fabric colour objectively, so that small and medium textile factories can check shade consistency without an expensive laboratory instrument.</p>
       <div class="btns">
-        <a class="btn btn-teal" href="demo.html">Try the live demo</a>
+        <a class="btn btn-teal" href="#system">See the research system</a>
         <a class="btn btn-primary" href="research.html">View research</a>
         <a class="btn btn-ghost" href="cvw.pdf" target="_blank" rel="noopener">CV (PDF)</a>
       </div>
@@ -49,27 +49,37 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap feature">
-    <figure class="shot">
-      <img src="demo.png" alt="Screenshot of the fabric colour inspection software" loading="lazy">
-      <figcaption>Inspection software: live camera view, readiness checks and colour-difference graph.</figcaption>
-    </figure>
-    <div>
-      <span class="tag progress">Manuscript in preparation</span>
-      <h2 style="margin-top:0.8rem">Low-cost real-time fabric colour variation detection</h2>
-      <p class="muted">A Python desktop application with a consumer USB webcam and daylight-balanced LED panels, instead of a spectrophotometer. The demo button opens a browser version of the same method that you can try with your own camera.</p>
-      <ul>
-        <li>Colour difference in CIEDE2000, with ΔE*ab and CMC(2:1) recorded</li>
-        <li>Five readiness checks before a test: camera, exposure, stability and even lighting</li>
-        <li>Pass/fail limit derived from the system's own measured noise</li>
-        <li>Reports with per-frame CSV export for analysis</li>
-      </ul>
-      <div class="btns">
-        <a class="btn btn-teal" href="demo.html">Try it in your browser</a>
-        <a class="btn btn-ghost" href="research.html#system">Read more</a>
-        <a class="btn btn-ghost" href="https://github.com/mdraselkhandaker20-png/fabric-color-detection-new" target="_blank" rel="noopener">GitHub</a>
+<section class="section" id="system">
+  <div class="wrap">
+    <span class="tag progress">Manuscript in preparation</span>
+    <h2 style="margin-top:0.8rem">Low-cost real-time fabric colour variation detection</h2>
+    <p class="lead" style="margin-bottom:2rem">A consumer USB webcam, daylight-balanced LED panels and open-source software, instead of a spectrophotometer.</p>
+    <div class="feature">
+      <figure class="shot video-slot">
+        <img src="demo.png" alt="The research system: Python desktop application" loading="lazy">
+        <figcaption>The research system — Python desktop application.</figcaption>
+      </figure>
+      <div>
+        <h3>The research system</h3>
+        <p class="muted">Python desktop application with a Logitech C270 USB webcam and a 5500 K LED booth. All research measurements are taken with this system.</p>
+        <ul>
+          <li>Colour difference in CIEDE2000, with ΔE*ab and CMC(2:1) recorded</li>
+          <li>Five readiness checks before a test: camera, exposure, stability and even lighting</li>
+          <li>Pass/fail limit derived from the system's own measured noise</li>
+          <li>Reports with per-frame CSV export for analysis</li>
+        </ul>
+        <div class="btns">
+          <a class="btn btn-primary" href="https://github.com/mdraselkhandaker20-png/fabric-color-detection-new" target="_blank" rel="noopener">Source code of the research system (Python)</a>
+          <a class="btn btn-ghost" href="research.html#system">Read more</a>
+        </div>
       </div>
+    </div>
+    <div class="try-box">
+      <div>
+        <h3>Try the method yourself</h3>
+        <p>A simplified browser version of the same method. It uses your own camera and room light, so results are indicative only — not measurements.</p>
+      </div>
+      <a class="btn btn-teal" href="demo.html">Try the web demo</a>
     </div>
   </div>
 </section>

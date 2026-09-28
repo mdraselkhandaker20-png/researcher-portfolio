@@ -292,3 +292,15 @@ h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
   .demo-grid, .steps { grid-template-columns: 1fr; }
   .res-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ─── Research system video + "try it" box ─── */
+.feature h3 { font-size: 1.35rem; margin-bottom: 0.4rem; }
+.video-frame { position: relative; aspect-ratio: 16 / 9; background: #1B1F2B; }
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.try-box {
+  margin-top: 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  background: var(--paper); border: 1px dashed #B9BFCC; border-radius: var(--radius); padding: 1.2rem 1.5rem;
+}
+.card .try-box { background: var(--paper); }
+.try-box h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
+.try-box p { color: var(--ink-2); font-size: 0.95rem; max-width: 40em; }

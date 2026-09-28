@@ -13,7 +13,7 @@
   <div class="nav-inner">
     <a href="index.html" class="brand">Md Rasel Khandaker</a>
     <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <ul class="nav-links" id="nav-links"><li><a href="index.html" class="">Home</a></li><li><a href="research.html" class="" aria-current="page">Research</a></li><li><a href="demo.html" class="nav-demo">Live demo</a></li><li><a href="about.html" class="">About</a></li><li><a href="skills.html" class="">Skills</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
+    <ul class="nav-links" id="nav-links"><li><a href="index.html" class="">Home</a></li><li><a href="research.html" class="" aria-current="page">Research</a></li><li><a href="demo.html" class="nav-demo">Web demo</a></li><li><a href="about.html" class="">About</a></li><li><a href="skills.html" class="">Skills</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
   </div>
 </header>
 <main>
@@ -41,15 +41,22 @@
       <div class="prose">
         <p>Spectrophotometers measure colour accurately, but they are expensive, read one small spot at a time and are used off-line. Manual inspection is fast but subjective. This system sits between the two: a webcam in a controlled lighting booth watches a large area of fabric and reports colour differences in real time.</p>
         <p>Each frame is converted to CIELAB and the median colour of the inspection region is compared with a reference using CIEDE2000, the current CIE recommendation. Before any test, five checks must pass — camera ready, not too dark, not over-exposed, stable over time, and evenly lit across a 3 × 3 grid. A calibration step measures the system's own noise on a uniform fabric and sets the pass/fail limit above it, so the system never reports noise as a defect.</p>
-        <p>The software separates the measurement camera from any other camera: a laptop webcam still works for demonstrations, but its results are clearly marked as demo readings.</p>
+        <p>The software separates the measurement camera from any other camera: a laptop webcam still works for demonstrations, but its results are clearly marked as demo readings. All research measurements are taken with the USB camera in the LED booth.</p>
       </div>
-      <figure class="shot" style="margin:1.5rem 0">
-        <img src="demo.png" alt="Screenshot of the fabric colour inspection software" loading="lazy">
-        <figcaption>The inspection interface.</figcaption>
+      <h3 style="margin-top:1.8rem">The research system in use</h3>
+      <figure class="shot video-slot" style="margin:0.8rem 0 1.2rem">
+        <img src="demo.png" alt="The research system: Python desktop application" loading="lazy">
+        <figcaption>The research system — Python desktop application.</figcaption>
       </figure>
       <div class="btns">
-        <a class="btn btn-teal" href="demo.html">Try the live demo</a>
-        <a class="btn btn-ghost" href="https://github.com/mdraselkhandaker20-png/fabric-color-detection-new" target="_blank" rel="noopener">Source code on GitHub</a>
+        <a class="btn btn-primary" href="https://github.com/mdraselkhandaker20-png/fabric-color-detection-new" target="_blank" rel="noopener">Source code of the research system (Python)</a>
+      </div>
+      <div class="try-box">
+        <div>
+          <h3>Try the method yourself</h3>
+          <p>A simplified browser version of the same method. It uses your own camera and room light, so results are indicative only — not measurements.</p>
+        </div>
+        <a class="btn btn-teal" href="demo.html">Try the web demo</a>
       </div>
     </div>
 

@@ -6,7 +6,7 @@
   <title>Md Rasel Khandaker — Machine Vision for Textile Quality</title>
   <meta name="description" content="Md Rasel Khandaker, PhD researcher at Multimedia University, builds low-cost machine vision systems for fabric colour inspection.">
   <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 <header class="nav">
@@ -18,39 +18,96 @@
 </header>
 <main>
 
-<section class="hero hero-compact">
-  <div class="wrap hero-grid">
-    <div>
+<section class="home">
+  <div class="wrap home-top">
+    <div class="home-intro">
       <p class="hero-role">PhD Researcher · Machine Vision for Textile Quality</p>
       <h1>Md Rasel Khandaker</h1>
       <p class="lead">I build low-cost vision systems that measure fabric colour objectively, so that small and medium textile factories can check shade consistency without an expensive laboratory instrument.</p>
       <div class="btns">
-        <a class="btn btn-teal" href="research.html#system">See the research system</a>
         <a class="btn btn-primary" href="research.html">View research</a>
         <a class="btn btn-ghost" href="cvw.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+        <a class="btn btn-ghost" href="contact.html">Contact</a>
       </div>
     </div>
     <div class="portrait"><img src="rasel.jpg" alt="Portrait of Md Rasel Khandaker" width="780" height="1040"></div>
   </div>
-  <div class="wrap quick">
-    <a class="quick-card" href="research.html#system">
-      <span class="tag progress">Manuscript in preparation</span>
-      <strong>The research system</strong>
-      <span>Python desktop application · Logitech C270 webcam · 5500 K LED booth</span>
-      <em>See the system →</em>
-    </a>
-    <a class="quick-card" href="demo.html">
-      <span class="tag done">Runs in your browser</span>
-      <strong>Try the web demo</strong>
-      <span>The same CIEDE2000 method with your own camera — indicative only</span>
-      <em>Open the demo →</em>
-    </a>
-    <a class="quick-card" href="research.html#publications">
-      <span class="tag">2 papers</span>
-      <strong>Publications</strong>
-      <span>ICTIM 2026 (presented) · IEEE manuscript in preparation</span>
-      <em>View publications →</em>
-    </a>
+
+  <div class="wrap home-tabs">
+    <div class="tabs" role="tablist" aria-label="Highlights">
+      <button role="tab" id="t-system" aria-controls="p-system" aria-selected="true">The research system</button>
+      <button role="tab" id="t-colour" aria-controls="p-colour" aria-selected="false" tabindex="-1">Same colour to the eye?</button>
+      <button role="tab" id="t-demo" aria-controls="p-demo" aria-selected="false" tabindex="-1">Web demo</button>
+      <button role="tab" id="t-pubs" aria-controls="p-pubs" aria-selected="false" tabindex="-1">Publications</button>
+    </div>
+
+    <div class="tab-panel" role="tabpanel" id="p-system" aria-labelledby="t-system">
+      <div class="panel-split">
+        <figure class="shot video-slot">
+          <img src="demo.png" alt="The research system: Python desktop application">
+          <figcaption>The research system — Python desktop application.</figcaption>
+        </figure>
+        <div>
+          <span class="tag progress">Manuscript in preparation</span>
+          <h2>Low-cost real-time fabric colour variation detection</h2>
+          <p class="muted">Python desktop application with a Logitech C270 USB webcam and a 5500 K LED booth. All research measurements are taken with this system.</p>
+          <ul class="ticks">
+            <li>CIEDE2000 colour difference, with ΔE*ab and CMC(2:1)</li>
+            <li>Five readiness checks before every test</li>
+            <li>Pass/fail limit from the system's measured noise</li>
+            <li>Reports with per-frame CSV export</li>
+          </ul>
+          <div class="btns">
+            <a class="btn btn-primary" href="https://github.com/mdraselkhandaker20-png/fabric-color-detection-new" target="_blank" rel="noopener">Source code (Python)</a>
+            <a class="btn btn-ghost" href="research.html#system">Read more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" role="tabpanel" id="p-colour" aria-labelledby="t-colour" hidden>
+      <p class="panel-lead">Five dyed samples beside their reference. Side by side they look alike, but at a CIEDE2000 limit of 2.0 two of them fail. The system makes that call from a webcam image in real time.</p>
+      <div class="swatches">
+        <div class="swatch swatch-ref"><div class="swatch-chip" style="background:#2E3A6B" role="img" aria-label="Reference colour #2E3A6B"></div><div class="swatch-meta"><span>Reference</span><span class="muted">—</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#2F3B6C" role="img" aria-label="Sample 1 colour #2F3B6C"></div><div class="swatch-meta"><span class="de">ΔE00 0.32</span><span class="verdict pass">Same</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#303C6E" role="img" aria-label="Sample 2 colour #303C6E"></div><div class="swatch-meta"><span class="de">ΔE00 0.71</span><span class="verdict pass">Same</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#2C3867" role="img" aria-label="Sample 3 colour #2C3867"></div><div class="swatch-meta"><span class="de">ΔE00 0.82</span><span class="verdict pass">Same</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#34416F" role="img" aria-label="Sample 4 colour #34416F"></div><div class="swatch-meta"><span class="de">ΔE00 2.25</span><span class="verdict fail">Different</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#3A4679" role="img" aria-label="Sample 5 colour #3A4679"></div><div class="swatch-meta"><span class="de">ΔE00 4.01</span><span class="verdict fail">Different</span></div></div>
+      </div>
+      <p class="swatch-note">Colour differences computed with CIEDE2000 from the sRGB values shown; limit ΔE00 = 2.0.</p>
+    </div>
+
+    <div class="tab-panel" role="tabpanel" id="p-demo" aria-labelledby="t-demo" hidden>
+      <div class="panel-split demo-split">
+        <div>
+          <h2>Try the method yourself</h2>
+          <p class="muted">A simplified browser version of the same method. It uses your own camera and room light, so results are indicative only — not measurements. Research measurements are made with the Python desktop system.</p>
+          <div class="btns"><a class="btn btn-teal" href="demo.html">Open the web demo</a></div>
+        </div>
+        <ol class="mini-steps">
+          <li>Press <b>Start camera</b> and allow camera access.</li>
+          <li>Hold one plain-coloured fabric so it fills the green box.</li>
+          <li>Type a fabric name and press <b>Start</b>.</li>
+          <li>Bring in a different shade and watch the graph turn red.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="tab-panel" role="tabpanel" id="p-pubs" aria-labelledby="t-pubs" hidden>
+      <ul class="pubs">
+        <li class="pub">
+          <span class="pub-title">Adoption of IoT-Enabled Quality Monitoring System in a Smart Factory</span>
+          <span class="pub-venue">M. R. Khandaker and S. P. A/P Thiagarajah · 6th International Conference on Technology and Innovation Management (ICTIM 2026), Multimedia University, Malaysia</span>
+          <span class="tag done">Presented</span>
+        </li>
+        <li class="pub">
+          <span class="pub-title">A Low-Cost Machine Vision System for Real-Time Fabric Colour Variation Detection</span>
+          <span class="pub-venue">M. R. Khandaker and S. P. A/P Thiagarajah · targeting an IEEE venue</span>
+          <span class="tag progress">In preparation</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -61,6 +118,6 @@
     <span>Machine vision for textile quality · Multimedia University, Malaysia</span>
   </div>
 </footer>
-<script src="site.js?v=4"></script>
+<script src="site.js?v=5"></script>
 </body>
 </html>

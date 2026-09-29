@@ -37,3 +37,27 @@ var SYSTEM_VIDEO_ID = '';
     }
   }
 })();
+
+// Home page tabs
+(function () {
+  var tabs = document.querySelectorAll('[role="tab"]');
+  if (!tabs.length) return;
+  function select(tab) {
+    for (var i = 0; i < tabs.length; i++) {
+      var on = tabs[i] === tab;
+      tabs[i].setAttribute('aria-selected', on ? 'true' : 'false');
+      tabs[i].tabIndex = on ? 0 : -1;
+      document.getElementById(tabs[i].getAttribute('aria-controls')).hidden = !on;
+    }
+  }
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].addEventListener('click', function () { select(this); });
+    tabs[i].addEventListener('keydown', function (e) {
+      var list = Array.prototype.slice.call(tabs), k = list.indexOf(this);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = list[(k + (e.key === 'ArrowRight' ? 1 : list.length - 1)) % list.length];
+        select(n); n.focus(); e.preventDefault();
+      }
+    });
+  }
+})();
